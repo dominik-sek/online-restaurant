@@ -4,6 +4,7 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css/bundle';
 import { Navigation } from "swiper";
 import './generic.css'
+import { Skeleton } from 'antd';
 
 const PRODUCT_DATA=[
     {
@@ -39,9 +40,8 @@ const PRODUCT_DATA=[
 function Home() {
   return (
     <Container>
-    <Card transform={true} positionAbsolute={true} blurred={true} animate={false}/>
-        <Card isForeground={true} animate={true}>
-        
+    <Card transform={true} positionAbsolute={true} blurred={true} animate={false} header={false}/>
+        <Card isForeground={true} animate={true} header={true}>
             <p>Check out our freshest offers!</p>
             <Swiper 
             navigation={true} 
@@ -54,10 +54,9 @@ function Home() {
                 
                 {PRODUCT_DATA.map(product => (
                     <SwiperSlide key={product.id}>
-                    <div style={{height:'60%', width:'auto'}}>
+                    <div style={{height:'60%', width:'auto', display:'flex' }}>
                     {/* tutaj przyciski do przeniesienia do oferty */}
-                    <img src={product.img} alt="product" style={{height:'100%', width:'auto'}}/>
-
+                    <img src={product.img} alt="product" style={{height:'100%', width:'100%'}}/>
                     </div>
                         
                     </SwiperSlide>

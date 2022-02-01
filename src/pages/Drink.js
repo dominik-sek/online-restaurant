@@ -7,11 +7,11 @@ import './generic.css'
 
 
 //api call to get products with flag on promiotion
-function Home() {
+function Drink() {
   return (
     <Container>
-    <Card transform={true} positionAbsolute={true} blurred={true} animate={false}/>
-        <Card isForeground={true} animate={true}>
+    <Card transform={true} positionAbsolute={true} blurred={true} animate={false} header={false}/>
+        <Card isForeground={true} animate={true} header={true}>
         
             <p>Drinks here</p>
             
@@ -31,4 +31,4 @@ const Container = styled.div`
   width: 100vw;
   
 `
-export default Home;
+export default Drink;

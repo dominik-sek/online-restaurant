@@ -36,7 +36,7 @@ const PRODUCT_DATA=[
     },
 ]
 //api call to get products with flag on promiotion
-function Home() {
+function Login() {
   return (
     <Container>
     <Card transform={true} position={true} blurred={true}/>
@@ -83,4 +83,4 @@ const Container = styled.div`
   width: 100vw;
   
 `
-export default Home;
+export default Login;

@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle';
 import { Navigation } from "swiper";
 import './generic.css'
+import ProductContainer from '../components/ProductContainer';
 
 const PRODUCT_DATA = [
     {
@@ -36,13 +37,13 @@ const PRODUCT_DATA = [
     },
 ]
 //api call to get products with flag on promiotion
-function Home() {
+function Menu() {
     return (
         <Container>
-            <Card transform={true} positionAbsolute={true} blurred={true} animate={false} />
+            <Card transform={true} positionAbsolute={true} blurred={true} animate={false} header={false} />
 
-            <Card isForeground={true} animate={true}>
-                <p>whole menu here</p>
+            <Card isForeground={true} animate={true} header={true}>
+                <ProductContainer products={PRODUCT_DATA}/>
             </Card>
 
 
@@ -59,4 +60,4 @@ const Container = styled.div`
   width: 100vw;
   
 `
-export default Home;
+export default Menu;

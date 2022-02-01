@@ -36,14 +36,13 @@ const PRODUCT_DATA=[
     },
 ]
 //api call to get products with flag on promiotion
-function Home() {
+function Food() {
   return (
     <Container>
-    <Card transform={true} positionAbsolute={true} blurred={true} animate={false}/>
-        <Card isForeground={true} animate={true}>
+    <Card transform={true} positionAbsolute={true} blurred={true} animate={false} header={false}/>
+        <Card isForeground={true} animate={true} header={true}>
             <p>Food here</p>
         </Card>
-
 
     </Container>
   );
@@ -58,4 +57,4 @@ const Container = styled.div`
   width: 100vw;
   
 `
-export default Home;
+export default Food;

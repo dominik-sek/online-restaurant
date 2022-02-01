@@ -1,55 +1,91 @@
 import React from 'react';
-import styled,{keyframes} from 'styled-components';
-import { useState } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
-import { Link } from 'react-router-dom';
-import { Skeleton } from 'antd';
+import { Link, useLocation } from 'react-router-dom';
+import '../pages/generic.css'
+
 
 
 const Card = (props) => {
+    const location = useLocation();
+    const [shaking, setShaking] = useState(false);
+
+    const animate = () => {
+            setShaking(true);
+            setTimeout(() => {
+                setShaking(false);
+            }, 2000);
+    }
+    const isPathAndShaking = (pathname) => {
+        if (pathname === location.pathname && shaking) {
+            return true;
+        }
+        return false;
+        
+    }
+    const header = () =>{
+        return(
+            <Header>
+            <Left>
+                <Link to={"/"} >
+                    <ShakeyButton onClick={animate} className={ isPathAndShaking("/") ? 'shake' : null}>
+                        <Icon style={{ cursor: 'pointer' }} icon="twemoji:house" color="#B38679" />
+                    </ShakeyButton>
+                </Link>
+
+                <Link to={"/menu"}>
+                    <ShakeyButton onClick={animate} className={isPathAndShaking("/menu")  ? 'shake' : null}><Icon style={{ cursor: 'pointer' }} icon="bx:bxs-food-menu" color="#B38679" />
+                    </ShakeyButton>
+                </Link>
+
+                <Link to={"/foods"}>
+                    <ShakeyButton onClick={animate} className={isPathAndShaking("/foods")  ? 'shake' : null}><Icon style={{ cursor: 'pointer' }} icon="twemoji:hamburger" color="#adffb9" />
+                    </ShakeyButton>
+                </Link>
+
+                <Link to={"/drinks"}>
+                    <ShakeyButton onClick={animate} className={isPathAndShaking("/drinks")  ? 'shake' : null}><Icon style={{ cursor: 'pointer' }} icon="noto:cup-with-straw" color="#adffb9" />
+                    </ShakeyButton>
+                </Link>
+            </Left>
+
+            <Middle>
+                <p> Hello, namehere</p>
+            </Middle>
+
+            <Right>
+                <Icon style={{ cursor: 'pointer' }} icon="emojione:shopping-cart" color="red" />
+                <Icon style={{ cursor: 'pointer' }} icon="ant-design:logout-outlined" color="red" />
+            </Right>
+        </Header>
+        )
+    }
+
+
+
     return (
         <Body props={props}>
-
-        <Header>
-             <Left>
-                 <Link to={"/"} >   <Icon style={{cursor:'pointer'}} icon="twemoji:house"  color="#B38679" /></Link>
-                 <Link to={"/menu"}>  <Icon style={{cursor:'pointer'}} icon="bx:bxs-food-menu"  color="#B38679" /></Link>
-                 <Link to={"/foods"}> <Icon style={{cursor:'pointer'}} icon="twemoji:hamburger" color="#adffb9"  /></Link>
-                 <Link to={"/drinks"}> <Icon style={{cursor:'pointer'}} icon="noto:cup-with-straw" color="#adffb9" /> </Link>
-             </Left>
- 
-                 <Middle>
-                 <p> Hello, namehere</p>
-                 </Middle>
- 
-                 <Right>
-                 <Icon style={{cursor:'pointer'}} icon="emojione:shopping-cart" color="red"  />
-                 <Icon style={{cursor:'pointer'}} icon="ant-design:logout-outlined" color="red"  />
-                 </Right>
-             </Header>
-
-
-        <Content>
-
-        {props.children}
-
-        </Content>
+            {props.header ? header() : null}
+            <Content>
+                {props.isForeground ? props.children : null}
+            </Content>
 
         </Body>
     )
 }
 
-
 const showCard = keyframes`
     0% {
-        opacity: 0;
+        opacity: 0.5;
         transform: translate(3%) rotate(5deg);
-        filter:blur(5px);
-
+        z-index: -1;
+       
     }
     50%{
         opacity:1;
-        filter:blur(2px);
+        filter:blur(3px);
+        z-index: -1;
     }
 
     100% {
@@ -61,30 +97,34 @@ const hideCard = keyframes`
     0% {
         opacity: 1;
         transform: translate(0%) rotate(0deg);
-        filter:blur(5px);
     }
     50%{
-        opacity: 0.5;
-        transform: translate(30%,-30%) rotate(5deg);
-        filter:blur(10px);
+        opacity:1;
+        transform: translate(70%,-70%) rotate(5deg);
 
     }
     100% {
         opacity: 1;
-        transform: translate(3%) rotate(5deg);
-}
+        z-index: -1;
+
     `
+const ShakeyButton = styled.div`
+    ${'' /* animation-name: ${shaking => shaking ? shake : ''};
+    animation-duration: 0.7s;
+    animation-iteration-count: 4; */}
+`;
+
 
 const Body = styled.div`
     width: calc(80% - 8em);
     height: 80%;
-    background: ${props => props.props.isForeground ? 'rgba(221, 255, 185, 1)' : 'rgba(221, 255, 185, 0.6)'};
+    background: ${props => props.props.isForeground ? 'rgba(84, 138, 224, 0.8)' : 'rgba(84, 138, 224, 0.6)'};
     border-radius: 5em;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     filter: ${props => props.props.blurred ? 'blur(5px)' : 'none'};
-    border: 1px solid rgba(221, 255, 185, 1);
+    border: 1px solid rgba(84, 138, 224, 1);
     transform: ${props => props.props.transform ? 'translate(3%) rotate(5deg)' : 'none'};
     position: ${props => props.props.positionAbsolute ? 'absolute' : 'relative'};
     font-size: 2.5rem;
@@ -92,7 +132,7 @@ const Body = styled.div`
     padding-right:4em;
 
 
-    animation-name: ${props => props.props.animate ? showCard : hideCard };
+    animation-name: ${props => props.props.animate ? showCard : hideCard};
     animation-duration: 1s;
     animation-fill-mode: forwards;
     animation-delay: 0s;
@@ -115,7 +155,7 @@ const Right = styled.div`
     display:flex;
     align-items:center;
     justify-content:flex-end;
-`   
+`
 const Middle = styled.div`
     margin-left:auto;
     margin-right:auto;
@@ -133,7 +173,7 @@ const Left = styled.div`
 `
 
 const Content = styled.div`
-    height: calc(80% - 1em);
+    height: calc(80% - 1.2em);
     width: 100%;
     border-radius: 0 0 5em 5em;
     margin-top:1em;
