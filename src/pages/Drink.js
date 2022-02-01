@@ -10,10 +10,10 @@ import './generic.css'
 function Home() {
   return (
     <Container>
-    <Card transform={true} position={true} blurred={true}/>
-        <Card foreground={true}>
+    <Card transform={true} positionAbsolute={true} blurred={true} animate={false}/>
+        <Card isForeground={true} animate={true}>
         
-            <p>Check out our freshest offers!</p>
+            <p>Drinks here</p>
             
         </Card>
 

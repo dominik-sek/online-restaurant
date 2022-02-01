@@ -39,8 +39,8 @@ const PRODUCT_DATA=[
 function Home() {
   return (
     <Container>
-    <Card transform={true} position={true} blurred={true}/>
-        <Card foreground={true}>
+    <Card transform={true} positionAbsolute={true} blurred={true} animate={false}/>
+        <Card isForeground={true} animate={true}>
         
             <p>Check out our freshest offers!</p>
             <Swiper 
@@ -63,8 +63,6 @@ function Home() {
                     </SwiperSlide>
                 ))}
 
-
-
             </Swiper>
             
         </Card>
@@ -81,6 +79,5 @@ const Container = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  
 `
 export default Home;
