@@ -22,6 +22,7 @@
     "react-spring": "^9.4.2",
     "react-transition-group": "^4.4.2",
     "react-twemoji": "^0.4.0",
+    "serve": "^13.0.2",
     "styled-components": "^5.3.3",
     "swiper": "^7.4.1",
     "web-vitals": "^2.1.0"
