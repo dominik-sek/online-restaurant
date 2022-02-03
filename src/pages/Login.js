@@ -14,13 +14,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
-
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 //api call to get products with flag on promiotion
 
 function Login({setToken}) {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const loginAndRedirect = () =>{
       axios({
@@ -35,17 +37,33 @@ function Login({setToken}) {
             setToken(response.data);
             navigate('/');
           }else{
+            setError(true);
           }
       }).catch(function (error) {
       });
   }
     
+  const somethingWrong = () =>{
+    return(
+      <Snackbar
+        open={error}
+        autoHideDuration={2000}
+        onClose={() => setError(false)}
+        anchorOrigin={ { vertical: 'top', horizontal: 'center' } }
+      >
+      <Alert onClose={() => setError(false)} severity="error" sx={{ width: '100%' }}>
+        Something went wrong!
+      </Alert>
 
+  </Snackbar>
+    )
+  };
   return (
     <Container>
       <Card transform={true} positionAbsolute={true} blurred={true} animate={false} header={false} />
 
       <Card title={"Login: "} isForeground={true} animate={true} header={true}>
+      {somethingWrong()}
       <Box
         noValidate
         autoComplete="off"
