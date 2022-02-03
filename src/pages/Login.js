@@ -26,7 +26,7 @@ function Login({setToken}) {
     console.log(login, password)
       axios({
           method: 'post',
-          url: 'http://localhost:8080/login',
+          url: 'https://pizzadev-server.herokuapp.com/login',
           data: {
               "username": login,
               "password": password

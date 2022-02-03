@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -48,12 +49,10 @@ function Cart(props) {
     <Container>
       <Card transform={true} positionAbsolute={true} blurred={true} animate={false} header={false} />
 
-      <Card title={"Your cart: "} isForeground={true} animate={true} header={true}>
+      <Card title={"Your cart: "} isCart={true} isForeground={true} animate={true} header={true} token={props.token}>
       <ProductContainer products={props.cart}/>
 
-      <Button  variant="contained" endIcon={<SendIcon />}>
-        Checkout
-      </Button>
+
       </Card>
 
     </Container>

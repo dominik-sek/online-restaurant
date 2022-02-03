@@ -41,7 +41,7 @@ const splitFoodDrinks =()=>{
 
 
 const getMenu = async () => {
-    const response = await axios.get('http://localhost:8080/menu');
+    const response = await axios.get('https://pizzadev-server.herokuapp.com/menu');
     return response.data;
 }
 

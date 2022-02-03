@@ -32,7 +32,7 @@ function SignUp() {
   const loginAndRedirect = () =>{
       axios({
           method: 'post',
-          url: 'http://localhost:8080/register',
+          url: 'https://pizzadev-server.herokuapp.com/register',
           data: {
               "username": login,
               "password": password,
@@ -90,7 +90,7 @@ function SignUp() {
     <Container>
 
       <Card transform={true} positionAbsolute={true} blurred={true} animate={false} header={false} />
-      <Card title={"Login: "} isForeground={true} animate={true} header={true}>
+      <Card title={"Register: "} isForeground={true} animate={true} header={true}>
       
       {somethingWrong()}
       {successMessage()}

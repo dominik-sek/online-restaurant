@@ -82,6 +82,7 @@ const Card = (props) => {
                 <Contents>
                     {props.title !== null ? props.title : null}
                 </Contents>
+                {console.log(props.isCart)}
                 {props.isForeground ? props.children : null}
             </Content>
 

@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import ProductCard from './ProductCard';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 
 const ProductContainer = (props) =>{
     return(
         <Container>
+        
             {props.products.map((product) => {
                 return(
                     <ProductCard key={product._id} id={product._id} product={product}/>
