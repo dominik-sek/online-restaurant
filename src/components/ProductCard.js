@@ -8,7 +8,6 @@ const ProductCard = (props) => {
 
 
     const [open, setOpen] = useState(false);
-    const [showBasicNav, setShowBasicNav] = useState(false);
     const ref = useRef();
 
 
@@ -52,13 +51,7 @@ const ProductCard = (props) => {
     }
 
 
-    const showNav = () => {
-        return (
-            <BasicNav show={showBasicNav} isOpen={open}>
-                {/* <Icon icon="ant-design:left-outlined" /> */}
-            </BasicNav>
-        );
-    }
+
     const scrollToOpened = () => {
         if (ref && ref.current) {
             ref.current.scrollIntoView({ behavior: 'smooth' });
@@ -67,13 +60,12 @@ const ProductCard = (props) => {
 
 
     return (
-        <Container ref={ref} isOpen={open} onMouseEnter={() => { setShowBasicNav(true) }} onMouseLeave={() => { setShowBasicNav(false) }} onClick={() => { scrollToOpened(ref) }} >
+        <Container ref={ref} isOpen={open} onClick={() => { scrollToOpened(ref) }} >
             <Body>
                 <Navigation>
                     <Icon onClick={() => { setOpen(!open) }} style={{ cursor: 'pointer' }} icon={open ? "ant-design:up-outlined" : "ant-design:down-outlined"} />
                 </Navigation>
                 {open ? showOpened() : showUnopened()}
-                {showNav()}
             </Body>
             {open ? showAllInfo() : null}
 
@@ -115,19 +107,7 @@ const ProductDesc = styled.div`
     width:40%;
     padding:0.3em;
     `
-const BasicNav = styled.div`
-    justify-content: center;
-    align-items: center;
-    display:flex;
-    width: calc(100% - 0.3em);
-    opacity: ${props => props.show && !props.isOpen ? 1 : 0};
-    display: ${props => props.show ? 'flex' : 'none'};
-    transition: opacity 0.5s linear;
-    position:absolute;
-    bottom:0;
-    height: 40%;
-    background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
-    `
+
 const Container = styled.div`
     display: flex;
     flex-direction: column;
