@@ -23,7 +23,6 @@ function Login({setToken}) {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const loginAndRedirect = () =>{
-    console.log(login, password)
       axios({
           method: 'post',
           url: 'https://pizzadev-server.herokuapp.com/login',
@@ -32,15 +31,12 @@ function Login({setToken}) {
               "password": password
           }
       }).then(function (response) {
-        console.log(response)
           if(response.data !== false){
             setToken(response.data);
             navigate('/');
           }else{
-            console.log("wrong something")
           }
       }).catch(function (error) {
-          console.log(error);
       });
   }
     

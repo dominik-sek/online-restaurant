@@ -9,7 +9,9 @@ import '../pages/generic.css'
 
 const Card = (props) => {
 
-    const location = useLocation();
+    let location = useLocation();
+
+
     const [shaking, setShaking] = useState(false);
     const animate = () => {
         setShaking(true);

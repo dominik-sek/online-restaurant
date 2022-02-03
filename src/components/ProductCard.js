@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import { Icon } from '@iconify/react';
 import React, { useState, useEffect, createRef, useRef } from 'react';
-import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 
-const ProductCard = (props, { setCart }) => {
+const ProductCard = (props) => {
 
 
     const [open, setOpen] = useState(false);
@@ -83,9 +82,6 @@ const ProductCard = (props, { setCart }) => {
 
 }
 
-ProductCard.propTypes = {
-    setCart: PropTypes.func.isRequired
-}
 
 const ProductHeader = styled.div`
     display: flex;

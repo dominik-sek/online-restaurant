@@ -5,7 +5,6 @@ import 'swiper/css/bundle';
 import { Navigation } from "swiper";
 import './generic.css'
 import ProductContainer from '../components/ProductContainer';
-import PropTypes from 'prop-types';
 
 //api call to get products with flag on promiotion
 function Drink(props) {
@@ -22,9 +21,7 @@ function Drink(props) {
     </Container>
   );
 }
-Drink.propTypes = {
-  setCart: PropTypes.func.isRequired
-}
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;

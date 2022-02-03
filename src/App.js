@@ -9,8 +9,6 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import SignUp from './pages/SignUp';
 import Cart from './pages/Cart';
-import { useLocation } from 'react-router-dom';
-import { useTransition, animated } from 'react-spring';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -41,7 +39,7 @@ const splitFoodDrinks =()=>{
 
 
 const getMenu = async () => {
-    const response = await axios.get('https://pizzadev-server.herokuapp.com/menu');
+    const response = await axios.get('https://pizzadev-server.herokuapp.com/menu')
     return response.data;
 }
 
@@ -73,9 +71,9 @@ return(
   <>
       <Routes>
        <Route exact path="/" element={<Home PRODUCT_DATA={menu} RANDOM_PRODUCTS={randomProducts} token={token}/>} />
-       <Route exact path ="/menu" element={<Menu setCart={setCart} PRODUCT_DATA={menu} token={token}/>} />
-       <Route exact path ="/drinks" element={<Drink setCart={setCart} PRODUCT_DATA={drinks} token={token} />} />
-       <Route exact path ="/foods" element={<Food setCart={setCart} PRODUCT_DATA={food} token={token}/>} />
+       <Route exact path ="/menu" element={<Menu PRODUCT_DATA={menu} token={token}/>} />
+       <Route exact path ="/drinks" element={<Drink  PRODUCT_DATA={drinks} token={token} />} />
+       <Route exact path ="/foods" element={<Food PRODUCT_DATA={food} token={token}/>} />
        <Route exact path= "/login" element={<Login setToken={setToken} token={token}/>} />
        <Route exact path= "/logout" element={<Logout setToken={setToken} token={token}/>} />
        <Route exact path= "/signup" element={<SignUp/>} />
