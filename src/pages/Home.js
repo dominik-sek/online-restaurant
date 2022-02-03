@@ -7,19 +7,8 @@ import './generic.css'
 import { Skeleton } from 'antd';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import jwt_decode from 'jwt-decode'
-//api call to get products with flag on promiotion
-let user = null;
+
 function Home(props) {
-    // const location = useLocation();
-    // if(location.state !== null){
-    //     // console.log(location.state.user)
-    //     if(location.state.user !== null){
-    //         user = location.state.user;
-    //     }
-    // }
-    // console.log(jwt_decode(props.token, { header: true }));
 
     return (
         <Container>

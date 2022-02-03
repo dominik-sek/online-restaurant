@@ -21,29 +21,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 function Cart(props) {
 
-  const navigate = useNavigate();
-  // const loginAndRedirect = () =>{
-    
-  //     axios({
-  //         method: 'post',
-  //         url: 'http://localhost:8080/login',
-  //         data: {
-  //             "username": login,
-  //             "password": password
-  //         }
-  //     }).then(function (response) {
-  //       console.log(response)
-  //         if(response.data !== false){
-  //           setToken(response.data);
-  //           navigate('/');
-  //         }else{
-  //           console.log("wrong something")
-  //         }
-  //     }).catch(function (error) {
-  //         console.log(error);
-  //     });
-  // }
-    
+
 
   return (
     <Container>

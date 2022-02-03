@@ -42,16 +42,13 @@ function SignUp() {
               "telephone": telephone
           }
       }).then(function (response) {
-        console.log(response)
           if(response.data !== false){
             //show message
             setSuccess(true);
-            // console.log(response)
           }else{
             setError(true)
           }
       }).catch(function (error) {
-          console.log(error);
       });
   }
   const somethingWrong = () =>{
