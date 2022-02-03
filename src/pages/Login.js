@@ -1,79 +1,97 @@
 import styled from 'styled-components';
 import Card from '../components/Card'
-import {Swiper, SwiperSlide} from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/bundle';
 import { Navigation } from "swiper";
 import './generic.css'
+import ProductContainer from '../components/ProductContainer';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link, useLocation } from 'react-router-dom';
 
-const PRODUCT_DATA=[
-    {
-        id:1,
-        img:'https://pngimg.com/uploads/cocacola/coca_cola_PNG8908.png',
-    },
-    {
-        id:2,
-        img:'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-    },
-    {
-        id:3,
-        img:'https://i.ytimg.com/vi/WcCAt9Cgpsk/mqdefault.jpg',
-    },
-    {
-        id:4,
-        img:'https://i.ytimg.com/vi/KgCGW4qwdB0/maxresdefault.jpg',
-    },
-    {
-        id:5,
-        img:'./images/product5.jpg',
-    },
-    {
-        id:6,
-        img:'./images/product6.jpg',
-    },
-    {
-        id:7,
-        img:'./images/product7.jpg',
-    },
-]
+
 //api call to get products with flag on promiotion
-function Login() {
+
+function Login({setToken}) {
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const loginAndRedirect = () =>{
+    console.log(login, password)
+      axios({
+          method: 'post',
+          url: 'http://localhost:8080/login',
+          data: {
+              "username": login,
+              "password": password
+          }
+      }).then(function (response) {
+        console.log(response)
+          if(response.data !== false){
+            setToken(response.data);
+            navigate('/');
+          }else{
+            console.log("wrong something")
+          }
+      }).catch(function (error) {
+          console.log(error);
+      });
+  }
+    
+
   return (
     <Container>
-    <Card transform={true} position={true} blurred={true}/>
-        <Card foreground={true}>
-        
-            <p>Check out our freshest offers!</p>
-            <Swiper 
-            navigation={true} 
-            modules={[Navigation]} 
-            className="ProductSwiper"
-            slidesPerView={3}
-            centeredSlides={true}
-            style={{height:'60%', width:'100%'}}
-            >
-                
-                {PRODUCT_DATA.map(product => (
-                    <SwiperSlide key={product.id}>
-                    <div style={{height:'60%', width:'auto'}}>
-                    {/* tutaj przyciski do przeniesienia do oferty */}
-                    <img src={product.img} alt="product" style={{height:'100%', width:'auto'}}/>
+      <Card transform={true} positionAbsolute={true} blurred={true} animate={false} header={false} />
 
-                    </div>
-                        
-                    </SwiperSlide>
-                ))}
+      <Card title={"Login: "} isForeground={true} animate={true} header={true}>
+      <Box
+        noValidate
+        autoComplete="off"
+        component="form"
+        style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'space-between', height:'50%', width: '100%'}}
+      > 
+        <TextField
+          required
+          id="outlined-basic"
+          label="Username"
+          variant="outlined"
+          onChange={(e) => {
+            setLogin(e.target.value);
+          }}
 
+        />
+        <TextField
+          required
+          id="outlined-basic"
+          label="Password"
+          variant="outlined"
+          type="password"
+          onChange={(e) => {
+             setPassword(e.target.value);
+          }}
+          />
 
+      <Button onClick={loginAndRedirect} variant="contained" endIcon={<SendIcon />}>
+        Login
+      </Button>
+      <Link to={"/signup"}> <p style={{fontSize:15}}>dont have an account?</p> </Link>
 
-            </Swiper>
-            
-        </Card>
+      </Box>
 
+      </Card>
 
     </Container>
   );
 }
-
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
+}
 const Container = styled.div`
   display: flex;
   flex-direction: column;

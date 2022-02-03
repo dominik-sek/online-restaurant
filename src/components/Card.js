@@ -8,57 +8,68 @@ import '../pages/generic.css'
 
 
 const Card = (props) => {
+
     const location = useLocation();
     const [shaking, setShaking] = useState(false);
-
     const animate = () => {
-            setShaking(true);
-            setTimeout(() => {
-                setShaking(false);
-            }, 2000);
+        setShaking(true);
+        setTimeout(() => {
+            setShaking(false);
+        }, 2000);
     }
     const isPathAndShaking = (pathname) => {
         if (pathname === location.pathname && shaking) {
             return true;
         }
         return false;
-        
     }
-    const header = () =>{
-        return(
+
+
+    const header = (token) => {
+        return (
             <Header>
-            <Left>
-                <Link to={"/"} >
-                    <ShakeyButton onClick={animate} className={ isPathAndShaking("/") ? 'shake' : null}>
-                        <Icon style={{ cursor: 'pointer' }} icon="twemoji:house" color="#B38679" />
-                    </ShakeyButton>
-                </Link>
 
-                <Link to={"/menu"}>
-                    <ShakeyButton onClick={animate} className={isPathAndShaking("/menu")  ? 'shake' : null}><Icon style={{ cursor: 'pointer' }} icon="bx:bxs-food-menu" color="#B38679" />
-                    </ShakeyButton>
-                </Link>
+                <Left>
+                    <Link to={"/"} >
+                        <ShakeyButton onClick={animate} className={isPathAndShaking("/") ? 'shake' : null}>
+                            <Icon style={{ cursor: 'pointer' }} icon="twemoji:house" color="#B38679" />
+                        </ShakeyButton>
+                    </Link>
 
-                <Link to={"/foods"}>
-                    <ShakeyButton onClick={animate} className={isPathAndShaking("/foods")  ? 'shake' : null}><Icon style={{ cursor: 'pointer' }} icon="twemoji:hamburger" color="#adffb9" />
-                    </ShakeyButton>
-                </Link>
+                    <Link to={"/menu"} >
+                        <ShakeyButton onClick={animate} className={isPathAndShaking("/menu") ? 'shake' : null}><Icon style={{ cursor: 'pointer' }} icon="bx:bxs-food-menu" color="#B38679" />
+                        </ShakeyButton>
+                    </Link>
 
-                <Link to={"/drinks"}>
-                    <ShakeyButton onClick={animate} className={isPathAndShaking("/drinks")  ? 'shake' : null}><Icon style={{ cursor: 'pointer' }} icon="noto:cup-with-straw" color="#adffb9" />
-                    </ShakeyButton>
-                </Link>
-            </Left>
+                    <Link to={"/foods"}>
+                        <ShakeyButton onClick={animate} className={isPathAndShaking("/foods") ? 'shake' : null}><Icon style={{ cursor: 'pointer' }} icon="twemoji:hamburger" color="#adffb9" />
+                        </ShakeyButton>
+                    </Link>
 
-            <Middle>
-                <p> Hello, namehere</p>
-            </Middle>
+                    <Link to={"/drinks"}>
+                        <ShakeyButton onClick={animate} className={isPathAndShaking("/drinks") ? 'shake' : null}><Icon style={{ cursor: 'pointer' }} icon="noto:cup-with-straw" color="#adffb9" />
+                        </ShakeyButton>
+                    </Link>
+                </Left>
 
-            <Right>
-                <Icon style={{ cursor: 'pointer' }} icon="emojione:shopping-cart" color="red" />
-                <Icon style={{ cursor: 'pointer' }} icon="ant-design:logout-outlined" color="red" />
-            </Right>
-        </Header>
+                <Middle>
+                    {token ? <p> Hello</p> : <p> Blue Cards restaurant</p>}
+                    
+                </Middle>
+
+                <Right>
+                
+                    {token ? 
+                        <>
+                    <Link to={"/cart"} ><Icon style={{ cursor: 'pointer' }} icon="emojione:shopping-cart" color="red" /></Link>
+                    <Link to={"/logout"}> <Icon style={{ cursor: 'pointer' }} icon="ant-design:logout-outlined" color="red" /></Link>
+                    </>
+                    : <Link to={"/login"}><Icon style={{ cursor: 'pointer' }} icon="ant-design:login-outlined" color="green" /></Link>}
+
+                    
+                </Right>
+            </Header>
+
         )
     }
 
@@ -66,8 +77,11 @@ const Card = (props) => {
 
     return (
         <Body props={props}>
-            {props.header ? header() : null}
+            {props.header ? header(props.token) : null}
             <Content>
+                <Contents>
+                    {props.title !== null ? props.title : null}
+                </Contents>
                 {props.isForeground ? props.children : null}
             </Content>
 
@@ -143,11 +157,17 @@ const Body = styled.div`
 `
 
 const Header = styled.div`
-    height: 20%;
     width: 100%;
     border-radius: 5em 5em 0 0;
     display:flex;
     align-items:center;
+    `
+const Contents = styled.div`
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:0.5em;
     `
 const Right = styled.div`
     margin-left:auto;
@@ -173,7 +193,7 @@ const Left = styled.div`
 `
 
 const Content = styled.div`
-    height: calc(80% - 1.2em);
+    height: calc(80% - 2.2em);
     width: 100%;
     border-radius: 0 0 5em 5em;
     margin-top:1em;

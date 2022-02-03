@@ -5,9 +5,9 @@ import ProductCard from './ProductCard';
 const ProductContainer = (props) =>{
     return(
         <Container>
-            {props.products.map((product, index) => {
+            {props.products.map((product) => {
                 return(
-                    <ProductCard key={index} id={index} product={product}/>
+                    <ProductCard key={product._id} id={product._id} product={product}/>
                 )
             })}
         </Container>
