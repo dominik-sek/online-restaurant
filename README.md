@@ -3,6 +3,8 @@
 
 [Frontend](https://pizzadev-front.herokuapp.com/) made using React.js
 
+Database: mongoDB
+
 ### sample account:
 ```login: pwsztarnow```
 
