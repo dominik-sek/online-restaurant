@@ -1,7 +1,7 @@
 # Online restaurant
-[backend](https://github.com/gothic459/pizzaDEVourers-server) Spring Boot
+[Backend](https://github.com/gothic459/pizzaDEVourers-server) made in spring Boot
 
-Frontend made using React.js
+[Frontend](https://pizzadev-front.herokuapp.com/) made using React.js
 
 ### sample account:
 ```login: pwsztarnow```
